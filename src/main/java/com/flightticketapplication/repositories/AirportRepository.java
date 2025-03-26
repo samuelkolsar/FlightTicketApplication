@@ -1,4 +1,7 @@
 package com.flightticketapplication.repositories;
 
-public interface AirportRepository extends org.springframework.data.jpa.repository.JpaRepository<com.flightticketapplication.entities.Airport, java.lang.Integer> {
-  }
+import com.flightticketapplication.entities.Airport;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AirportRepository extends JpaRepository<Airport, Integer> {
+}

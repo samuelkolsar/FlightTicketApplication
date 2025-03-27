@@ -66,7 +66,7 @@ public class FlightService {
         // Create First-Class Seats
         // Single seats - Window seat + extra legroom
         for (int i = 1; i <= FIRST_CLASS_SEATS; i++) {
-            SeatId seatId = new SeatId(flight, i);
+            SeatId seatId = new SeatId(flight.getId(), i);
             seats.add(Seat.builder().seatClass(1).isReserved(false).id(seatId).windowSeat(true).extraLegroom(true).closeToExit(false).build());
         }
 
@@ -79,7 +79,7 @@ public class FlightService {
         for (int row = 0; row < rows; row++) {
             if (row == rows-1) nearExit = true;
             for (int j = 0; j < 4; j++) {
-                SeatId seatId = new SeatId(flight, i);
+                SeatId seatId = new SeatId(flight.getId(), i);
                 if (j==0 || j==3) seats.add(Seat.builder().seatClass(2).isReserved(false).id(seatId).extraLegroom(true).windowSeat(true).closeToExit(nearExit).build());
                 else seats.add(Seat.builder().seatClass(2).isReserved(false).id(seatId).extraLegroom(true).windowSeat(false).closeToExit(nearExit).build());
                 i++;
@@ -92,7 +92,7 @@ public class FlightService {
         for (int row = 0; row < rows; row++) {
             if (row == rows - 1) nearExit = true;
             for (int j = 0; j < 6; j++) {
-                SeatId seatId = new SeatId(flight, i);
+                SeatId seatId = new SeatId(flight.getId(), i);
                 if (j==0 || j==5) seats.add(Seat.builder().seatClass(2).isReserved(false).id(seatId).extraLegroom(false).windowSeat(true).closeToExit(nearExit).build());
                 else seats.add(Seat.builder().seatClass(2).isReserved(false).id(seatId).extraLegroom(false).windowSeat(false).closeToExit(nearExit).build());
                 i++;
@@ -103,6 +103,4 @@ public class FlightService {
         // Save all seats in the database
         seatRepository.saveAll(seats);
     }
-
-
 }

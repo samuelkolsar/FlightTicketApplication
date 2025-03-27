@@ -1,8 +1,14 @@
 package com.flightticketapplication.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+@Builder
+@Getter
+@Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Airports")
 public class Airport {
     @Id

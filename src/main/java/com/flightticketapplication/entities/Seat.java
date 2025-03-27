@@ -1,13 +1,14 @@
 package com.flightticketapplication.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "Seats")
 public class Seat {

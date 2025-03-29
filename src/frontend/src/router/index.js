@@ -1,16 +1,24 @@
 // router/index.js
-import { createRouter, createWebHistory } from "vue-router";
-import SearchFlights from "../views/SearchFlights.vue";
-import SelectSeats from "../views/SelectSeats.vue";
-
-const routes = [
-    { path: "/", component: SearchFlights },
-    { path: "/select-seats/:flightId", component: SelectSeats },
-];
+import { createRouter, createWebHistory } from 'vue-router'
+import FindFlight from '@/views/FindFlight.vue'
+import ChooseSeats from '@/views/ChooseSeats.vue'
 
 const router = createRouter({
     history: createWebHistory(),
-    routes,
-});
+    routes: [
+        {
+            path: '/',
+            name: 'find-flight',
+            component: FindFlight,
+        },
+        {
 
-export default router;
+            path: '/choose-seats/:flightId/:selectedClass/:travellers',
+            name: 'ChooseSeats',
+            component: ChooseSeats,
+            props: true
+        }
+    ]
+})
+
+export default router

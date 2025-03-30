@@ -7,6 +7,6 @@ git clone https://github.com/samuelkolsar/FlightTicketApplication.git
 cd FlightTicketApplication
 docker-compose up
 ```
-Peale käskude sisestamist peaks rakendus avanema [siin]([localhost](http://localhost))
+Peale käskude sisestamist peaks rakendus avanema [siin](http://localhost)
 
 

@@ -8,7 +8,7 @@
         class="header__image"
       />
     </header>
-  </template>
+  </template> 
   
   <script>
   export default {
@@ -22,7 +22,7 @@
     flex-direction: column;
     align-items: center;
     padding: 4rem 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
                 url('../assets/header.jpg');
     background-size: cover;
     background-position: center;

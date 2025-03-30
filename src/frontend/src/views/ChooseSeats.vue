@@ -5,16 +5,18 @@
     <div class="seating-plan">
       <div v-for="(row, rowIndex) in rows" :key="rowIndex" class="row">
         <div class="side left">
-          <div v-for="seat in row.slice(0, seatsPerRow / 2)" :key="seat.id"
-               :class="['seat', { reserved: seat.reserved, selected: selectedSeats.includes(seat.id) }]"
+          <div v-for="seat in row.slice(0, seatsPerRow / 2)" 
+               :key="seat.seatNumber"
+               :class="['seat', { reserved: seat.reserved, selected: selectedSeats.includes(seat.seatNumber) }]"
                @click="toggleSeat(seat)">
             {{ seat.seatNumber }}
           </div>
         </div>
         <div class="aisle"></div>
         <div class="side right">
-          <div v-for="seat in row.slice(seatsPerRow / 2)" :key="seat.id"
-               :class="['seat', { reserved: seat.reserved, selected: selectedSeats.includes(seat.id) }]"
+          <div v-for="seat in row.slice(seatsPerRow / 2)" 
+               :key="seat.seatNumber"
+               :class="['seat', { reserved: seat.reserved, selected: selectedSeats.includes(seat.seatNumber) }]"
                @click="toggleSeat(seat)">
             {{ seat.seatNumber }}
           </div>
@@ -88,28 +90,28 @@ export default {
     },
     toggleSeat(seat) {
       if (seat.reserved) return;
-      const index = this.selectedSeats.indexOf(seat.id);
+      const seatNumber = seat.seatNumber; // use the actual seat number
+      const index = this.selectedSeats.indexOf(seatNumber);
       // If already selected, remove it.
       if (index >= 0) {
         this.selectedSeats.splice(index, 1);
       } else {
         // Otherwise, if selection count is less than allowed, add the seat.
         if (this.selectedSeats.length < this.numTravellers) {
-          this.selectedSeats.push(seat.id);
+          this.selectedSeats.push(seatNumber);
         }
       }
     },
     confirmSeats() {
       console.log('Confirmed seats:', this.selectedSeats);
-      axios.get('http://localhost:8080/api/flights/book', { 
-        params: { 
-          flightId: this.flightId,
-          seatIds: this.selectedSeats  // ensure this is an array of numbers
-        }
+      axios.post('http://localhost:8080/api/flights/book', this.selectedSeats, { 
+        params: { flightId: this.flightId },
+        headers: { 'Content-Type': 'application/json' }
       })
         .then(response => {
           console.log('Booking confirmed:', response.data);
-          // Route back to home
+          alert('Booking confirmed!');
+          // Redirect to the find flight page after booking confirmation.
           this.$router.push({ name: 'find-flight' });
         })
         .catch(error => {
@@ -146,13 +148,18 @@ export default {
   width: 40px; /* Represents the walkway/aisle */
 }
 .seat {
+  width: 50px;
+  height: 50px;
   background-color: #4caf50;
   color: white;
   padding: 10px;
-  text-align: center;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 .seat:hover {
   background-color: #45a049;

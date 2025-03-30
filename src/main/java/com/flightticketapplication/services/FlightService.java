@@ -42,13 +42,13 @@ public class FlightService {
             endAirport = airports.get(random.nextInt(airports.size()));
         } while (startAirport.equals(endAirport));
 
-        // Departing time is in the next 5 months and arrival time is 2-8 hours after the departure
-        LocalDateTime departureTime = LocalDateTime.now().plusDays(random.nextInt(30)).plusMonths(random.nextInt(4));
+        // Departing time is in the next 5 months + random hours in 12h
+        // Arrival time is 2-8 hours after the departure
+        LocalDateTime departureTime = LocalDateTime.now().plusDays(random.nextInt(30)).plusMonths(random.nextInt(4)).plusHours(random.nextInt(12));
         LocalDateTime arrivalTime = departureTime.plusHours(2 + random.nextInt(6));
 
         // Price is generated between 50 and 550
         double price = 50 + (random.nextDouble() * 500);
-
 
         return Flight.builder().departureTime(departureTime).arrivalTime(arrivalTime).startPoint(startAirport).endPoint(endAirport).price(price).build();
     }
@@ -56,21 +56,20 @@ public class FlightService {
     public void addSeatsToFlight(Flight flight) {
         Flight savedFlight = flightRepository.save(flight);
         generateSeatsForFlight(savedFlight);
-
     }
 
     private void generateSeatsForFlight(Flight flight) {
         List<Seat> seats = new ArrayList<>();
         int seatNumber = 1;
 
-        // Create First-Class Seats
+        // Create First Class Seats
         // Single seats - Window seat + extra legroom
         for (int i = 1; i <= FIRST_CLASS_SEATS; i++) {
             SeatId seatId = new SeatId(flight.getId(), i);
             seats.add(Seat.builder().seatClass(1).isReserved(false).id(seatId).windowSeat(true).extraLegroom(true).closeToExit(false).build());
         }
 
-        // Create Business-Class Seats
+        // Create Business Class Seats
         // Always have extra legroom
         // Last row is near an exit
         boolean nearExit = false;
@@ -86,21 +85,27 @@ public class FlightService {
             }
         }
 
-        // Create Economy-Class Seats
+        // Create Economy Class Seats
         // Rows of 6, no one has extra leg room.
         rows = ECONOMY_CLASS_SEATS / 6;
         for (int row = 0; row < rows; row++) {
             if (row == rows - 1) nearExit = true;
             for (int j = 0; j < 6; j++) {
                 SeatId seatId = new SeatId(flight.getId(), i);
-                if (j==0 || j==5) seats.add(Seat.builder().seatClass(2).isReserved(false).id(seatId).extraLegroom(false).windowSeat(true).closeToExit(nearExit).build());
-                else seats.add(Seat.builder().seatClass(2).isReserved(false).id(seatId).extraLegroom(false).windowSeat(false).closeToExit(nearExit).build());
+                if (j==0 || j==5) seats.add(Seat.builder().seatClass(3).isReserved(false).id(seatId).extraLegroom(false).windowSeat(true).closeToExit(nearExit).build());
+                else seats.add(Seat.builder().seatClass(3).isReserved(false).id(seatId).extraLegroom(false).windowSeat(false).closeToExit(nearExit).build());
                 i++;
                 nearExit = false;
             }
         }
 
-        // Save all seats in the database
+        // Save all seats to the database
         seatRepository.saveAll(seats);
     }
+    public List<Flight> getFlights(String fromCity, String toCity, LocalDateTime departureStart, LocalDateTime departureEnd) {
+        int fromId = airportRepository.findAirportIdByCityOrCountry(fromCity);
+        int toId = airportRepository.findAirportIdByCityOrCountry(toCity);
+        return flightRepository.findByStartPoint_idAndEndPoint_idAndDepartureTimeBetween(fromId, toId, departureStart, departureEnd);
+    }
+
 }

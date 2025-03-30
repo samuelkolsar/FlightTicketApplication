@@ -22,14 +22,7 @@ public class FlightTicketApplication {
         var airportService = context.getBean(AirportService.class);
         var seatService = context.getBean(SeatService.class);
 
-        seatService.reserveSeat(2L,1);
-        var seats = seatService.findAllSeatsByFlightId(2L);
-        for (Seat seat : seats) {
-            System.out.println(seat);
-        }
-//
-//        repository.deleteById(1);
-//        for (int i = 0; i < 5; i++) {
+//        for (int i = 0; i < 10000; i++) {
 //            var flight = flightService.createRandomFlight();
 //            flightService.addSeatsToFlight(flight);
 //        }

@@ -23,4 +23,7 @@ public class AirportService {
             return "New airport added: " + city;
         }
     }
+    public int getAirport(String param) {
+        return airportRepository.findAirportIdByCityOrCountry(param);
+    }
 }

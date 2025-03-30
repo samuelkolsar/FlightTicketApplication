@@ -1,5 +1,6 @@
 package com.flightticketapplication.entities;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,6 +14,7 @@ import lombok.*;
 @Table(name = "Seats")
 public class Seat {
 
+    @JsonUnwrapped
     @EmbeddedId
     private SeatId id;
 

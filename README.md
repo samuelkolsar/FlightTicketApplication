@@ -39,3 +39,8 @@ Kasutatud materjal:
 Spring Booti raamistiku kasutamisel sain ideid Mosh Hamedani materjalidest.
 
 Vue.js aluseks kasutasin Tartu Ülikooli aines Veebirakenduse Loomine (LTAT.05.004) loodud rakendusi.
+
+
+Kokkuvõte:
+
+Õppisin töö käigus väga palju uut ja huvitavat, näiteks kuidas paigutada rakendus Dockeri konteinerisse ning kuidas frontendis erinevaid komponente omavahel üheskoos töötama panna.

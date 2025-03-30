@@ -46,4 +46,4 @@ Vue.js aluseks kasutasin Tartu Ülikooli aines Veebirakenduse Loomine (LTAT.05.0
 
 Kokkuvõte:
 
-Õppisin töö käigus väga palju uut ja huvitavat, näiteks kuidas paigutada rakendus Dockeri konteinerisse ning kuidas frontendis erinevaid komponente omavahel üheskoos töötama panna.
+Õppisin töö käigus väga palju uut ja huvitavat, näiteks kuidas paigutada rakendus Dockeri konteinerisse ning kuidas frontendis erinevaid komponente omavahel üheskoos töötama panna. Lisaks oli see ka esimene kord kui olen kätt proovinud Spring Bootiga.

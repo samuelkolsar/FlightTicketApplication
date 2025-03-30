@@ -8,8 +8,11 @@ cd FlightTicketApplication
 docker-compose up
 ```
 Peale käskude sisestamist peaks rakendus avanema [siin](http://localhost)
+
 Esmasel avamisel genereerib rakendus avamise päevast järgmise nädala sisse 1000 erinevat lendu, seega kulub esmakäivitamisel veidi rohkem aega.
+
 Kriitiline on lasta lennud ära genereerida ja mitte rakendust vahepeal sulgeda.
+
 
 ### Lendude otsing ja filtreerimine
 

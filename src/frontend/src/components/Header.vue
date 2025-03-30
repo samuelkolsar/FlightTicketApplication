@@ -1,4 +1,3 @@
-<!-- components/Header.vue -->
 <template>
     <header class="section__container header__container">
       <h1 class="section__header">Book today<br />Make memories for life</h1>

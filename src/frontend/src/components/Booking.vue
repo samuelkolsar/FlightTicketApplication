@@ -1,4 +1,3 @@
-<!-- components/BookingSection.vue -->
 <template>
   <section class="section__container booking__container">
     <div class="booking__nav">
@@ -76,13 +75,10 @@
           <p>Add date</p>
         </div>
       </div>
-      
-      <!-- Search button at the bottom -->
       <button class="btn" type="submit">
         <i class="ri-search-line"></i>
       </button>
     </form>
-    <!-- Pass the selectedClass as prop -->
     <FlightList :flights="flights" :loading="loading" :selected-class="selectedClass" :travellers="formData.travellers" />
   </section>
 </template>

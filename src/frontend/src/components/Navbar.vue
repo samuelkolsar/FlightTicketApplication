@@ -1,4 +1,3 @@
-<!-- components/Navbar.vue -->
 <template>
   <nav>
     <div class="nav__logo">EstAviation</div>

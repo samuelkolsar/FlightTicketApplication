@@ -1,4 +1,3 @@
-// router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
 import FindFlight from '@/views/FindFlight.vue'
 import ChooseSeats from '@/views/ChooseSeats.vue'

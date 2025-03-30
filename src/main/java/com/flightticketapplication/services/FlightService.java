@@ -42,7 +42,7 @@ public class FlightService {
             endAirport = airports.get(random.nextInt(airports.size()));
         } while (startAirport.equals(endAirport));
 
-        // Departing time is in the next week + random hours up to 12h
+        // Departing time is in the next week + random hours up 12h
         // Arrival time is 2-8 hours after the departure
         LocalDateTime departureTime = LocalDateTime.now().plusDays(random.nextInt(7)).plusHours(random.nextInt(12));
         LocalDateTime arrivalTime = departureTime.plusHours(2 + random.nextInt(6));

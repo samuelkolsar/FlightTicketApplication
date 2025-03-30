@@ -2,7 +2,6 @@
   <section class="flight-list">
     <div v-if="loading" class="loading">Loading flights...</div>
     <div v-else>
-      <!-- Price Filter Slider -->
       <div class="price-filter" v-if="flights.length">
         <input
           id="priceFilter"
@@ -12,7 +11,6 @@
           :max="sliderMaxPrice"
           step="1"
         />
-        <!-- Display the selected slider value under the slider -->
         <div class="slider-value">
           Selected Price: {{ formatCurrency(priceFilter) }}
         </div>
@@ -29,7 +27,6 @@
             Flight Duration: {{ calculateFlightDuration(flight.departureTime, flight.arrivalTime) }}
           </p>
           <p>Price: {{ formatCurrency(calculatePrice(flight.price)) }}</p>
-          <!-- Book button -->
           <button class="btn book-btn" @click="bookFlight(flight)">Book</button>
         </div>
       </div>
@@ -130,9 +127,8 @@ export default {
       }
       return (basePrice * multiplier).toFixed(2);
     },
-    // Currency formatting helper
     formatCurrency(value) {
-      return '$' + value;
+      return '€' + value;
     }
   }
 }

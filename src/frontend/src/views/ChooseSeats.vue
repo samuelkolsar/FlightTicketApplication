@@ -39,17 +39,15 @@ export default {
       travelClass: '',
       numTravellers: 1,
       seats: [],
-      selectedSeats: [] // now an array of seat IDs
+      selectedSeats: [] 
     }
   },
   computed: {
-    // Determine how many seats per row based on travel class.
     seatsPerRow() {
       if (this.travelClass === 'First Class') return 2;
       else if (this.travelClass === 'Business Class') return 4;
       else return 6; // Economy Class
     },
-    // Group seats into rows of seatsPerRow.
     rows() {
       const rows = [];
       for (let i = 0; i < this.seats.length; i += this.seatsPerRow) {
@@ -59,7 +57,6 @@ export default {
     }
   },
   created() {
-    // Retrieve flightId, travelClass, and travellers from route params.
     this.flightId = this.$route.params.flightId;
     this.travelClass = this.$route.params.selectedClass;
     this.numTravellers = parseInt(this.$route.params.travellers);
@@ -67,7 +64,6 @@ export default {
   },
   methods: {
     fetchSeats() {
-      // Fetch seat data from backend matching flight and travel class.
       axios.get('http://localhost:8080/api/flights/seats', { 
         params: { 
           flightId: this.flightId, 
@@ -90,13 +86,11 @@ export default {
     },
     toggleSeat(seat) {
       if (seat.reserved) return;
-      const seatNumber = seat.seatNumber; // use the actual seat number
+      const seatNumber = seat.seatNumber; 
       const index = this.selectedSeats.indexOf(seatNumber);
-      // If already selected, remove it.
       if (index >= 0) {
         this.selectedSeats.splice(index, 1);
       } else {
-        // Otherwise, if selection count is less than allowed, add the seat.
         if (this.selectedSeats.length < this.numTravellers) {
           this.selectedSeats.push(seatNumber);
         }
@@ -111,7 +105,6 @@ export default {
         .then(response => {
           console.log('Booking confirmed:', response.data);
           alert('Booking confirmed!');
-          // Redirect to the find flight page after booking confirmation.
           this.$router.push({ name: 'find-flight' });
         })
         .catch(error => {
@@ -145,7 +138,7 @@ export default {
   gap: 10px;
 }
 .aisle {
-  width: 40px; /* Represents the walkway/aisle */
+  width: 40px;
 }
 .seat {
   width: 50px;

@@ -1,4 +1,3 @@
-<!-- views/FindFlight.vue -->
 <template>
   <div class="find-flight">
     <Navbar />

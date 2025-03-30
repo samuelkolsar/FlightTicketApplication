@@ -79,7 +79,7 @@ public class FlightController {
     @PostMapping("/book")
     public void bookSeats(
             @RequestParam Integer flightId,
-            @RequestBody Integer[] seatIds  // Now using POST with a request body for the seat IDs
+            @RequestBody Integer[] seatIds
     ) {
         for (Integer seatId : seatIds) {
             seatService.reserveSeat((long) flightId, seatId);

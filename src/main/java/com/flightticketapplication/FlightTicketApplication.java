@@ -1,30 +1,45 @@
 package com.flightticketapplication;
 
-import com.flightticketapplication.entities.Flight;
-import com.flightticketapplication.entities.Seat;
-import com.flightticketapplication.repositories.FlightRepository;
-import com.flightticketapplication.services.AirportService;
+import com.flightticketapplication.entities.Airport;
+import com.flightticketapplication.repositories.AirportRepository;
 import com.flightticketapplication.services.FlightService;
-import com.flightticketapplication.services.SeatService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class FlightTicketApplication {
 
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(FlightTicketApplication.class, args);
-        var repository = context.getBean(FlightRepository.class);
         var flightService = context.getBean(FlightService.class);
-        var airportService = context.getBean(AirportService.class);
-        var seatService = context.getBean(SeatService.class);
+        AirportRepository airportRepository = context.getBean(AirportRepository.class);
 
-//        for (int i = 0; i < 10000; i++) {
-//            var flight = flightService.createRandomFlight();
-//            flightService.addSeatsToFlight(flight);
-//        }
+        // Adding airports if there aren't any.
+        if (airportRepository.count() <= 1) {
+            String[] countries = {
+            "Estonia", "Latvia", "Spain", "Italy", "France",
+                    "Portugal", "Sweden", "Hungary", "Austria", "Switzerland",
+                    "United Arab Emirates", "Thailand", "Poland", "Croatia",
+                    "Argentina", "Brazil", "Japan"};
+
+            String[] capitals = {
+                    "Tallinn", "Riga", "Madrid", "Naples", "Paris",
+                    "Lisbon", "Stockholm", "Budapest", "Vienna", "Bern",
+                    "Dubai", "Bangkok", "Warsaw", "Zagreb",
+                    "Buenos Aires", "Rio de Janeiro", "Tokyo"
+            };
+            for (int i = 0; i < countries.length; i++) {
+                airportRepository.save(Airport.builder().country(countries[i]).city(capitals[i]).build());
+            }
+        }
+        // If the database is empty, there will be 1000 flight generated.
+        if (!flightService.isThereFlights()){
+            for (int i = 0; i < 1000; i++) {
+                var flight = flightService.createRandomFlight();
+                flightService.addSeatsToFlight(flight);
+            }
+        }
     }
 }

@@ -42,9 +42,9 @@ public class FlightService {
             endAirport = airports.get(random.nextInt(airports.size()));
         } while (startAirport.equals(endAirport));
 
-        // Departing time is in the next 5 months + random hours in 12h
+        // Departing time is in the next week + random hours up to 12h
         // Arrival time is 2-8 hours after the departure
-        LocalDateTime departureTime = LocalDateTime.now().plusDays(random.nextInt(30)).plusMonths(random.nextInt(4)).plusHours(random.nextInt(12));
+        LocalDateTime departureTime = LocalDateTime.now().plusDays(random.nextInt(7)).plusHours(random.nextInt(12));
         LocalDateTime arrivalTime = departureTime.plusHours(2 + random.nextInt(6));
 
         // Price is generated between 50 and 550
@@ -106,6 +106,9 @@ public class FlightService {
         int fromId = airportRepository.findAirportIdByCityOrCountry(fromCity);
         int toId = airportRepository.findAirportIdByCityOrCountry(toCity);
         return flightRepository.findByStartPoint_idAndEndPoint_idAndDepartureTimeBetween(fromId, toId, departureStart, departureEnd);
+    }
+    public boolean isThereFlights() {
+        return flightRepository.count() > 0;
     }
 
 }

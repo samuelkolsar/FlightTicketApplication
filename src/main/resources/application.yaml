@@ -2,10 +2,13 @@ spring:
   application:
     name: FlightTicketApplication
   datasource:
-    url: jdbc:mysql://localhost:3306/flights?createDatabaseIfNotExist=true
+    url: jdbc:mysql://db:3306/flights?createDatabaseIfNotExist=true
     username: root
     password: DevPass03
   flyway:
     schemas: flights
   jpa:
     show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

@@ -36,4 +36,5 @@ Minu ideed antud puudustele:
 Kasutatud materjal:
 
 Spring Booti raamistiku kasutamisel sain ideid Mosh Hamedani materjalidest.
+
 Vue.js aluseks kasutasin Tartu Ülikooli aines Veebirakenduse Loomine (LTAT.05.004) loodud rakendusi.

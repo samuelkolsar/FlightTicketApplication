@@ -17,6 +17,7 @@ Kriitiline on lasta lennud ära genereerida ja mitte rakendust vahepeal sulgeda.
 - Siis valida reisijate arv
 - Lennu istkoha klass (esimene klass/äriklass/turistiklass)
 - Ning lennu väljumiskuupäev
+
 Kui peale otsingut on lennud kuvatud, siis on võimalik lende omakorda hinna abil filtreerida kasutades liugurriba.
 
 
